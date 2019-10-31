@@ -1,20 +1,19 @@
 <?php
 
+/** Start file */
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+use App\Controller\AppController;
 
-require __DIR__ . './vendor/autoload.php';
-
+require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->get('/', function(Request $req, Response $res, $args){
+$app->addErrorMiddleware(true, true, true);
 
-    $res->getBody()->write("Olá Mundo !");
-
-    return $res;
-
-});
+/** Main routes */
+$app->get('/', AppController::class . ":home");
 
 $app->run();
