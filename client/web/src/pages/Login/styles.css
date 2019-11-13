@@ -1,0 +1,34 @@
+.login-container{
+    display: flex;
+    flex-grow: 1;
+    height: 100vh;
+    width: 100vw;
+    /* background-color: red; */
+}
+
+.login-container div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box{
+    display: flex;
+    background-color: #e43c3c;
+    width: 30%;
+}
+
+.welcome-box{
+    flex-grow: 1;
+}
+
+.welcome-box span{
+    font-family: 'Dancing Script';
+    font-size: 5em;
+    font-weight: bold;
+    color: #313131;
+    box-sizing: border-box;
+    padding: 9px 30px;
+    border-bottom: 1px solid #ffe9e9;
+}
