@@ -1,0 +1,37 @@
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.form-group label{
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 5px
+}
+
+.form-group label.light{
+    color: #fff;
+}
+
+.form-group input{
+    outline: none;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.808);
+    border-radius: 5px;
+    padding: 10px;
+    height: 40px;
+    font-size: 14px;
+    transition: 150ms;
+}
+
+.form-group input:hover{
+    background-color: rgba(255, 255, 255, 0.548);
+}
+
+.form-group input:focus{
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.171);
+
+}

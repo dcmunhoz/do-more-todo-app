@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Form from './../../Components/Form';
+import Input from './../../Components/Input';
 
 import './styles.css';
 
@@ -12,8 +13,26 @@ export default function Login(){
             <div class="login-box">
 
                 <Form>
-                    <input type="text"/>
-                    <input type="text"/>
+
+                    <Input 
+                        type="text" 
+                        title="Usuário"
+                        titleClass="light"
+                        place="Digite seu usuário"
+                        inputId="username"
+                        inputName="username"
+                    />
+
+                    <Input 
+                        type="text" 
+                        title="Senha"
+                        titleClass="light"
+                        place="Digite sua senha"
+                        inputId="password"
+                        inputName="password"
+                    />
+
+                    
 
                     <button>Entrar</button>
                 </Form>
