@@ -1,16 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import Form from './../../Components/Form';
 import Input from './../../Components/Input';
 
 import './styles.css';
 
-export default function Login(){
+export default function Login({history}){
+
+    function handleAction() {
+
+        history.push('/main');
+
+    }
 
     return (
-        <div class="login-container">
-            <div class="login-box">
+        <div className="login-container">
+            <div className="login-box">
 
                 <Form>
 
@@ -32,13 +37,18 @@ export default function Login(){
                         inputName="password"
                     />
 
-                    
-
-                    <button>Entrar</button>
+                    <Input 
+                        type="button"
+                        inputId="btn-login"
+                        inputName="btn-login"
+                        value="Entrar"
+                        inputClass="btn-green"
+                        action={handleAction}
+                    />
                 </Form>
                 
             </div>
-            <div class="welcome-box">
+            <div className="welcome-box">
                 <span>Do More</span>
             </div>
         </div>
