@@ -1,18 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 import './style.css';
 
 const Input = (props) => {
-
-    let [ inputValue, setInputValue ] = useState('');
-
-    useEffect(() => {
-
-    }, []);
-
-    function handleChangeInput(el) {
-        setInputValue(el.target.value)
-    }
 
     return (
         
@@ -21,19 +11,19 @@ const Input = (props) => {
             {/* Text / Password */}
             {(props.type !== "button" && props.type !== "submit") ? (
                 <>
-                    <label 
-                    htmlFor={`${props.inputName}`}
+                    {(props.title) ? <label 
+                    htmlFor={`${props.name}`}
                     className={`${props.titleClass}`}
 
-                    > {props.title} </label>
+                    > {props.title} </label> : null } 
 
                     <input 
                         type={props.type} 
                         placeholder={props.place || null} 
-                        id={props.inputId || null} 
-                        name={props.inputName || null}
-                        value={inputValue}
-                        onChange={handleChangeInput}
+                        id={props.name || null} 
+                        name={props.name || null}
+                        value={props.value}
+                        onChange={props.action}
                     />
                 </>
             ) : null }            
@@ -42,9 +32,9 @@ const Input = (props) => {
             {(props.type === 'button' || props.type === 'submit') ? (
                 <button 
                     type={props.type} 
-                    id={props.inputId || null} 
-                    name={props.inputName || null}
-                    className={"btn " + props.inputClass || null}
+                    id={props.name || null} 
+                    name={props.name || null}
+                    className={"btn " + props.class || null}
                     onClick={props.action}
                 > {props.value || null} </button>
             ) : null}

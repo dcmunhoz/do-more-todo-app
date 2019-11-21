@@ -1,15 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Form from './../../Components/Form';
 import Input from './../../Components/Input';
 
 import './styles.css';
 
-export default function Login({history}){
+export default function Login({history}){   
+    const dispatch = useDispatch();
 
+    // States
+    const { username, password } = useSelector(state => state.login);
+
+    // Effects
+
+    //Functions 
     function handleAction() {
 
         history.push('/main');
+
+    }
+
+    function handleUserChange( el ) {
+
+        let user = el.target.value;
+
+        dispatch({
+            type: "USERNAME_CHANGE",
+            value: user
+        });
+        
+
+    }
+
+    function handlePasswordChange (el) {
+
+        let pass = el.target.value
+
+        dispatch({
+            type: "PASSWORD_CHANGE",
+            value: pass
+        });
 
     }
 
@@ -24,8 +55,9 @@ export default function Login({history}){
                         title="Usuário"
                         titleClass="light"
                         place="Digite seu usuário"
-                        inputId="username"
-                        inputName="username"
+                        name="username"
+                        value={username}
+                        action={handleUserChange}
                     />
 
                     <Input 
@@ -33,16 +65,16 @@ export default function Login({history}){
                         title="Senha"
                         titleClass="light"
                         place="Digite sua senha"
-                        inputId="password"
-                        inputName="password"
+                        name="password"
+                        value={password}
+                        action={handlePasswordChange}
                     />
 
                     <Input 
                         type="button"
-                        inputId="btn-login"
-                        inputName="btn-login"
+                        name="btn-login"
                         value="Entrar"
-                        inputClass="btn-green"
+                        class="btn-green"
                         action={handleAction}
                     />
                 </Form>
