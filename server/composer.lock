@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32bc67c00abf81a224d27915e204b796",
+    "content-hash": "7998bdc641895e67aaded0d23b48549c",
     "packages": [
+        {
+            "name": "dcmunhoz/data-access",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dcmunhoz/data-access.git",
+                "reference": "2a4760acf47d714aa7a3ea9eab62c93a96388b02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dcmunhoz/data-access/zipball/2a4760acf47d714aa7a3ea9eab62c93a96388b02",
+                "reference": "2a4760acf47d714aa7a3ea9eab62c93a96388b02",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DataAccess\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "dcmunhoz",
+                    "email": "dc.munhoz@hotmail.com"
+                }
+            ],
+            "description": "Data Access is a library designed to manipulate databases",
+            "time": "2019-10-25T00:32:30+00:00"
+        },
         {
             "name": "fig/http-message-util",
             "version": "1.1.3",
