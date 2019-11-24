@@ -22,4 +22,6 @@ define("DATA_ACCESS", [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]
-  ]);
+]);
+
+date_default_timezone_set("America/Sao_Paulo");

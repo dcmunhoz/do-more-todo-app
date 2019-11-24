@@ -9,6 +9,7 @@ use App\App\Authentication;
 
 class AuthController extends Controller
 {
+    private const SESSION_USER = "Authentication";
     
     public function login(Request $req, Response $res, array $args = [])
     {
@@ -28,24 +29,38 @@ class AuthController extends Controller
             
         }
         
-        
         $auth = new Authentication();
 
         $result = $auth->login($username, $password);
 
-        if (empty($result)) {
-            
-            $res->getBody()->write(\json_encode([
-                "error"=>true,
-                "msg"=>"User not found"
-            ]));
+        if ($result['error']) {
 
+            $res->getBody()->write($result);
             return $res->withStatus(403);
 
         }
 
+        $authentication = [
+            "id"   => $result['id_user'],
+            "user" => $result['username'],
+            "creation" => date("d/m/Y H:i:s")
+        ];
 
-        // return $res->withHeader("Content-Type", " application/json");
+        $token = \base64_encode( json_encode($authentication) );
+        \session_start();
+        
+        if (!isset($_SESSION[SESSION_USER])) {
+
+            $_SESSION[SESSION_USER] = $token;
+
+        }
+
+        $res->getBody()->write( \json_encode( [
+            "auth" => true,
+            "token" => $_SESSION[SESSION_USER]
+        ] ) );
+
+        return $res;
 
     }
 

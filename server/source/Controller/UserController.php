@@ -20,19 +20,16 @@ class UserController
         $email    = $body['email'];
 
         $user = new User();
-
         $user->username = $username;
         $user->password = $password;
-        $user->name = $name;
-        $user->email = $email;
+        $user->name     = $name;
+        $user->email    = $email;
 
         $result = $user->create();
 
-        if (isset($result['error'])) {
+        if ($result['error']) {
 
-            $res->getBody()->write(json_encode([
-                $result
-            ]));
+            $res->getBody()->write($result);
 
             return $res->withStatus(403);
 

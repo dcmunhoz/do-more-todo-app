@@ -26,10 +26,10 @@ class User extends DataAccess
 
         if (count($userExists) >= 1) {
 
-            return [
+            return json_encode([
                 "error" => true,
                 "msg" => "User exists"
-            ];
+            ]);
 
         }
 

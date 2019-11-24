@@ -22,16 +22,24 @@ class Authentication
 
         $result = $user->find()->filter("username = :username", [":username" => $username])->fetch();
 
-        if (count($result) <= 0) {
+        if (!$result) {
 
-            return;
+            return \json_encode([
+                "error"=>true,
+                "msg"=>"User not found"
+            ]);
 
         }
 
-        $user->setData($result);
+        $validate = \password_verify($password, $result['password']);
 
-        var_dump($user->username);
-        die;
+        if (!$validate) {
+            return \json_encode([
+                "error" => true,
+                "msg"   => "Login failed"
+            ]);
+
+        }
 
         return $result;
 
