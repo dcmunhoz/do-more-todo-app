@@ -8,6 +8,9 @@
  * 
  */
 
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+
 define("DATA_ACCESS", [
     "driver"   => "mysql",
     "host"     => "localhost",
@@ -17,6 +20,6 @@ define("DATA_ACCESS", [
     "password" => "domore@",
     "options"  => [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]
   ]);

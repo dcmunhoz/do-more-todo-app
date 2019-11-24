@@ -1,16 +1,11 @@
 <?php
 
 namespace App\App;
-use DataAccess\DataAccess;
 
-class Authentication extends DataAccess
+use App\App\User;
+
+class Authentication
 {
-
-    public function __construct(){
-
-        parent::__construct("TB_USERS", "id_user");
-
-    }
 
     /**
      * 
@@ -19,14 +14,26 @@ class Authentication extends DataAccess
      * @param string $username Username
      * @param string $password Password
      * 
-     */
+     */ 
     public function login($username, $password)
     {
 
-        $user = parent::find()->filter("username = :user", [":user" => $username])->fetch();        
+        $user = new User;
 
-        var_dump($user);
+        $result = $user->find()->filter("username = :username", [":username" => $username])->fetch();
+
+        if (count($result) <= 0) {
+
+            return;
+
+        }
+
+        $user->setData($result);
+
+        var_dump($user->username);
         die;
+
+        return $result;
 
     }
 

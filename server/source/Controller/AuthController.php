@@ -17,9 +17,33 @@ class AuthController extends Controller
         $username = $body['username'];
         $password = $body['password'];
 
+        if (empty($username) || empty($password)) {
+            
+            $res->getBody()->write(\json_encode([
+                "error"=>true,
+                "msg"=>"Username and password can't be empty"
+            ]));
+
+            return $res->withStatus(400);
+            
+        }
+        
+        
         $auth = new Authentication();
 
-        $auth->login($username, $password);
+        $result = $auth->login($username, $password);
+
+        if (empty($result)) {
+            
+            $res->getBody()->write(\json_encode([
+                "error"=>true,
+                "msg"=>"User not found"
+            ]));
+
+            return $res->withStatus(403);
+
+        }
+
 
         // return $res->withHeader("Content-Type", " application/json");
 

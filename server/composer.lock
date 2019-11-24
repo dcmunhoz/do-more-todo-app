@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "dcmunhoz/data-access",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dcmunhoz/data-access.git",
-                "reference": "2a4760acf47d714aa7a3ea9eab62c93a96388b02"
+                "reference": "d7534003c49cac09e7e74c5ecdc426e5216afcb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dcmunhoz/data-access/zipball/2a4760acf47d714aa7a3ea9eab62c93a96388b02",
-                "reference": "2a4760acf47d714aa7a3ea9eab62c93a96388b02",
+                "url": "https://api.github.com/repos/dcmunhoz/data-access/zipball/d7534003c49cac09e7e74c5ecdc426e5216afcb3",
+                "reference": "d7534003c49cac09e7e74c5ecdc426e5216afcb3",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 }
             ],
             "description": "Data Access is a library designed to manipulate databases",
-            "time": "2019-10-25T00:32:30+00:00"
+            "time": "2019-11-24T19:55:30+00:00"
         },
         {
             "name": "fig/http-message-util",
