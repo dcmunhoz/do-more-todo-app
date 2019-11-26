@@ -64,4 +64,58 @@ class AuthController extends Controller
 
     }
 
+    public function logout(Request $req, Response $res, array $args = []) 
+    {
+
+        $headers  = $req->getHEaders();
+
+        if (!isset( $headers['Authentication'] )) {
+
+            $res->getBody()->write( \json_encode( [
+                "error" => true,
+                "msg" => "Authentication token not found"
+            ] ) );
+                
+            return $res->withStatus(403);
+
+        }
+
+        $userToken = $headers["Authentication"][0];
+        
+        \session_start();
+        if (!isset($_SESSION[SESSION_USER]) || $_SESSION[SESSION_USER] === null || $_SESSION[SESSION_USER] === "") {
+            
+            $res->getBody()->write( \json_encode( [
+                "error" => true,
+                "msg" => "User not authenticated"
+            ] ) );
+                
+            return $res->withStatus(403);
+            
+        }
+        
+        $userSession = $_SESSION[SESSION_USER];
+
+        if ($userToken !== $userSession) {
+
+            $res->getBody()->write( \json_encode( [
+                "error" => true,
+                "msg" => "Token is different from user logged"
+            ] ) );
+                
+            return $res->withStatus(403);
+            
+        }
+
+        unset($_SESSION[SESSION_USER]);
+
+        $res->getBody()->write( \json_encode([
+            "success" => true,
+            "msg" => "User session destroyed"
+        ]) );
+
+        return $res;
+
+    }
+
 }

@@ -17,6 +17,7 @@ $app->addErrorMiddleware(true, true, true);
 
 /** User Authentication */
 $app->post('/login', AuthController::class . ":login");
+$app->get('/logout', AuthController::class . ":logout");
 
 /** User */
 $app->post('/user/create', UserController::class . ":create");
