@@ -2,6 +2,8 @@
 
 namespace App\App;
 
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use App\App\User;
 
 class Authentication
@@ -42,6 +44,51 @@ class Authentication
         }
 
         return $result;
+
+    }
+
+    /**
+     * 
+     * Verify if user is authenticated
+     * 
+     * @param Request $req HTTP Request data
+     * 
+     */
+    public static function isAuth(Request $req) {
+
+        $headers  = $req->getHEaders();
+
+        if (!isset( $headers['Authentication'] )) {
+
+            return [
+                "error" => true,
+                "msg" => "Authentication token not found"
+            ];
+
+        }
+
+        $userToken = $headers["Authentication"][0];
+        
+        \session_start();
+        if (!isset($_SESSION[SESSION_USER]) || $_SESSION[SESSION_USER] === null || $_SESSION[SESSION_USER] === "") {
+
+            return [
+                "error" => true,
+                "msg" => "User not authenticated"
+            ];
+            
+        }
+        
+        $userSession = $_SESSION[SESSION_USER];
+
+        if ($userToken !== $userSession) {
+
+            return [
+                "error" => true,
+                "msg" => "Token is different from user logged"
+            ];
+            
+        }
 
     }
 
