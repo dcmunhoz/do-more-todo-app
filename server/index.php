@@ -8,9 +8,9 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response as Res;
 
-
 use App\Controller\AuthController;
 use App\Controller\UserController;
+use App\Controller\TodoController;
 
 use App\App\Authentication;
 
@@ -31,6 +31,8 @@ $app->post('/user/create', UserController::class . ":create");
 $app->group("", function($group){
     
     $group->get('/logout', AuthController::class . ":logout");
+
+    $group->post('/todo/add', TodoController::class . "createTodo");
 
 })->add(function (Request $req, RequestHandler $handler) {
 
