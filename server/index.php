@@ -32,7 +32,7 @@ $app->group("", function($group){
     
     $group->get('/logout', AuthController::class . ":logout");
 
-    $group->post('/todo/add', TodoController::class . "createTodo");
+    $group->post('/todo/add', TodoController::class . ":createTodo");
 
 })->add(function (Request $req, RequestHandler $handler) {
 

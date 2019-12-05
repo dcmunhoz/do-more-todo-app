@@ -53,4 +53,14 @@ class User extends DataAccess
 
     }
 
+    public function getAuthUser()
+    {
+        \session_start();
+        $token = $_SESSION[SESSION_USER];
+        $tokeData = \json_decode(\base64_decode($token));
+
+        $this->findById($tokeData->id);
+
+    }
+
 }

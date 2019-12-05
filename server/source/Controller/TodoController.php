@@ -16,9 +16,19 @@ class TodoController extends Controller{
     public function createTodo(Request $req, Response $res, array $args = []) 
     {
         
-        $todo = new Todo();       
+        $body = $req->getParsedBody();
 
-        die;
+        $todo = new Todo();       
+        $todo->name = $body['name'];
+        $todo->desc = $body['desc'];
+        $todo->create();
+        
+        $res->getBody()->write(\json_encode([
+            "success"=>true,
+            "msg" => "Todo created"
+        ]));
+
+        return $res;
 
     }
 
