@@ -22,14 +22,14 @@ class User extends DataAccess
     public function create()
     {
 
-        $userExists = parent::raw("SELECT username FROM tb_users WHERE username = :username",[ ":username" => $this->username ])[0];
+        $userExists = parent::raw("SELECT username FROM tb_users WHERE username = :username",[ ":username" => $this->username ]);
 
         if (count($userExists) >= 1) {
 
-            return json_encode([
+            return [
                 "error" => true,
                 "msg" => "User exists"
-            ]);
+            ];
 
         }
 

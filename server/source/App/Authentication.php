@@ -26,20 +26,20 @@ class Authentication
 
         if (!$result) {
 
-            return \json_encode([
+            return [
                 "error"=>true,
                 "msg"=>"User not found"
-            ]);
+            ];
 
         }
 
         $validate = \password_verify($password, $result['password']);
 
         if (!$validate) {
-            return \json_encode([
+            return [
                 "error" => true,
                 "msg"   => "Login failed"
-            ]);
+            ];
 
         }
 

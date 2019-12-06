@@ -27,9 +27,10 @@ class UserController
 
         $result = $user->create();
 
-        if ($result['error']) {
 
-            $res->getBody()->write($result);
+        if (isset($result['error'])) {
+
+            $res->getBody()->write(\json_encode($result));
 
             return $res->withStatus(403);
 
