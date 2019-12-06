@@ -35,7 +35,7 @@ class AuthController extends Controller
 
         if ($result['error']) {
 
-            $res->getBody()->write($result);
+            $res->getBody()->write(\json_encode($result));
             return $res->withStatus(403);
 
         }
