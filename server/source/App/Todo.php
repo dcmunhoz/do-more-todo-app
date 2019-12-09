@@ -18,6 +18,27 @@ class Todo extends DataAccess{
 
     /**
      * 
+     * Validate if Authenticate user is the same as todo owner
+     * 
+     */
+    public function validateUser(){
+
+        $user = new User();
+        $user->getAuthUser();
+
+        if ((int) $user->id_user !== (int) $this->id_user) {
+
+            return [
+                "error"=>true,
+                "msg"=>"User logged is diferent from todo owner !"
+            ];
+
+        }
+
+    }
+
+    /**
+     * 
      * Create a new todo on DB
      * 
      */
@@ -48,6 +69,35 @@ class Todo extends DataAccess{
             ":id_todo" => (int) $this->id_todo
         ]);
 
+    }
+
+    /**
+     * 
+     * Set todo Done
+     * 
+     */
+    public function done()
+    {   
+
+        $result = parent::raw("UPDATE tb_todos SET done = true WHERE id_todo = :id_todo", [
+            ":id_todo" => $this->id_todo
+        ]);
+        
+        if ($result) {
+
+            return [
+                "success"=>true,
+                "msg"=>"Todo set to done"
+            ];
+
+        } else {
+
+            return [
+                "error"=>true,
+                "msg"=>"error to delete todo"
+            ];
+
+        } 
     }
 
 }

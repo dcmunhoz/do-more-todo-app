@@ -51,17 +51,12 @@ class TodoController extends Controller{
     {
 
         $todo = new Todo();
-        $user = new User();
-        $user->getAuthUser();
         $todo->findById($args['todoId']);
+        $result = $todo->validateUser();
 
-        if ((int) $user->id_user !== (int) $todo->id_user) {
+        if (isset($result['error'])) {
 
-            $res->getBody()->write(\json_encode([
-                "error"=>true,
-                "msg"=>"User logged is diferent from todo owner !"
-            ]));
-
+            $res->getBody()->write(\json_encode($result));
             return $res->withStatus(403);
 
         }
@@ -75,6 +70,34 @@ class TodoController extends Controller{
 
         return $res;
 
+    }
+
+    public function markTodoDone(Request $req, Response $res, array $args = [])
+    {
+
+        $todo = new Todo();
+        $todo->findById($args['todoId']);
+        $result = $todo->validateUser();
+
+        if (isset($result['error'])) {
+
+            $res->getBody()->write(\json_encode($result));
+            return $res->withStatus(403);
+
+        }
+
+        $todoDone = $todo->done();
+
+        if (isset($todoDone['error'])) {
+
+            $res->getBody()->write(\json_encode($todoDone));
+            return $res->withStatus(400);
+
+        }
+
+        $res->getBody()->write(\json_encode($todoDone));
+        return $res;
+        
     }
 
 }

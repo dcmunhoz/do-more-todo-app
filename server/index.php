@@ -32,8 +32,9 @@ $app->group("", function($group){
     
     $group->get('/logout', AuthController::class . ":logout");
     $group->post('/todo/add', TodoController::class . ":createTodo");
-    $group->get("/todo", TodoController::class . ":listTodo");
+    $group->get('/todo', TodoController::class . ":listTodo");
     $group->delete('/todo/{todoId}', TodoController::class . ":deleteTodo");
+    $group->post('/todo/{todoId}/done', TodoController::class . ":markTodoDone");
 
 })->add(function (Request $req, RequestHandler $handler) {
 
@@ -58,7 +59,5 @@ $app->group("", function($group){
     return $response;
 
 });
-
-
 
 $app->run();
