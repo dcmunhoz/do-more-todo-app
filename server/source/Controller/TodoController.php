@@ -47,4 +47,34 @@ class TodoController extends Controller{
         return $res;
     }
 
+    public function deleteTodo(Request $req, Response $res, array $args = [])
+    {
+
+        $todo = new Todo();
+        $user = new User();
+        $user->getAuthUser();
+        $todo->findById($args['todoId']);
+
+        if ((int) $user->id_user !== (int) $todo->id_user) {
+
+            $res->getBody()->write(\json_encode([
+                "error"=>true,
+                "msg"=>"User logged is diferent from todo owner !"
+            ]));
+
+            return $res->withStatus(403);
+
+        }
+
+        $todo->delete();
+
+        $res->getBody()->write(\json_encode([
+            "success"=>"true",
+            "msg"=>"Todo deleted"
+        ]));
+
+        return $res;
+
+    }
+
 }

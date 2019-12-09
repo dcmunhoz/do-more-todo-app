@@ -35,4 +35,19 @@ class Todo extends DataAccess{
 
     }
 
+    /**
+     * 
+     * Delete an todo
+     * 
+     */
+    public function delete()
+    {
+
+        parent::raw("DELETE FROM tb_todos WHERE id_user = :id_user AND id_todo = :id_todo", [
+            ":id_user" => (int) $this->id_user,
+            ":id_todo" => (int) $this->id_todo
+        ]);
+
+    }
+
 }
