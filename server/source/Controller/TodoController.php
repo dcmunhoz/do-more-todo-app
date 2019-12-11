@@ -8,6 +8,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Core\Controller;
 use App\App\Todo;
 use App\App\User;
+use App\App\Group;
 
 /**
  * Todo routes controller
@@ -124,6 +125,29 @@ class TodoController extends Controller{
         ]));    
     
         return $res;
+
+    }
+
+    public function createGroup(Request $req, Response $res, array $args = [])
+    {
+
+        $body = $req->getParsedBody();
+        $group = new Group();
+        $user = new User();
+
+        $user->getAuthUser();
+
+        $group->name = $body['name'];
+        $group->user = $user;
+        $group->create();
+
+        $res->getBody()->write(\json_encode([
+            "success" => true,
+            "msg"     => "Group succefuly created"
+        ]));
+
+        return $res;
+
 
     }
 

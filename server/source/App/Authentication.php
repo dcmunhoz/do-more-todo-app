@@ -56,7 +56,7 @@ class Authentication
      */
     public static function isAuth(Request $req) {
 
-        $headers  = $req->getHEaders();
+        $headers  = $req->getHeaders();
 
         if (!isset( $headers['Authentication'] )) {
 

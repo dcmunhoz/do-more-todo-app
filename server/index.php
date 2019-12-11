@@ -31,11 +31,16 @@ $app->post('/user/create', UserController::class . ":create");
 $app->group("", function($group){
     
     $group->get('/logout', AuthController::class . ":logout");
-    $group->post('/todo/add', TodoController::class . ":createTodo");
+
+    /** TODO Routes */
     $group->get('/todo', TodoController::class . ":listTodo");
+    $group->post('/todo/add', TodoController::class . ":createTodo");
     $group->delete('/todo/{todoId}', TodoController::class . ":deleteTodo");
     $group->post('/todo/{todoId}', TodoController::class . ":updateTodo");
     $group->post('/todo/{todoId}/done', TodoController::class . ":markTodoDone");
+
+    /** GROUP Routes */
+    $group->post('/group/add', TodoController::class . ":createGroup");
 
 })->add(function (Request $req, RequestHandler $handler) {
 
