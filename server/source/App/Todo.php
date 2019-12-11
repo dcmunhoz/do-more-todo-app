@@ -50,7 +50,7 @@ class Todo extends DataAccess{
         $query = parent::raw(" INSERT INTO tb_todos(id_user, name, description) VALUES(:USER, :NAME, :DESC); ", [
             ":USER" => (int) $user->id_user,
             ":NAME" => (string) $this->name,
-            ":DESC" => (string) $this->description
+            ":DESC" => (string) $this->desc
         ]);
         
 
@@ -98,6 +98,22 @@ class Todo extends DataAccess{
             ];
 
         } 
+    }
+
+    /**
+     * 
+     * Update an todo
+     * 
+     */
+    public function update()
+    {
+
+        parent::raw("UPDATE tb_todos SET name = :name, description = :desc where id_todo = :id_todo",[
+            ":name" => (string) $this->name,
+            ":desc" => (string) $this->desc,
+            ":id_todo" => (int) $this->id_todo
+        ]);
+
     }
 
 }

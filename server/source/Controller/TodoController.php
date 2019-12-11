@@ -100,4 +100,31 @@ class TodoController extends Controller{
         
     }
 
+    public function updateTodo(Request $req, Response $res, array $args = [])
+    {
+        $todo = new Todo();
+        $todo->findById($args['todoId']);
+        $result = $todo->validateUser();
+
+        if (isset($result['error'])) {
+
+            $res->getBody()->write(\json_encode($result));
+            return $res->withStatus(403);
+
+        }
+        
+        $body = $req->getParsedBody();
+        $todo->name = $body['name'];
+        $todo->desc = $body['desc'];
+        $todo->update();
+
+        $res->getBody()->write(\json_encode([
+            "success" => true,
+            "msg" => "Todo updated"
+        ]));    
+    
+        return $res;
+
+    }
+
 }
