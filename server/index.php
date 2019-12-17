@@ -42,6 +42,8 @@ $app->group("", function($group){
     /** GROUP Routes */
     $group->post('/group/add', TodoController::class . ":createGroup");
 
+    $group->post('/group/{idGroup}/todo/{idTodo}', TodoController::class . ":addTodoOnGroup");
+
 })->add(function (Request $req, RequestHandler $handler) {
 
     /**

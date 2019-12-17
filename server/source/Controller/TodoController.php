@@ -151,4 +151,55 @@ class TodoController extends Controller{
 
     }
 
+    public function addTodoOnGroup(Request $req, Response $res, array $args = [])
+    {
+
+        $idGroup = $args['idGroup'];
+        $idTodo = $args['idTodo'];
+
+        $group = new Group();
+        $group->findById($idGroup);
+
+        if ( $group->id_group === NULL ) {
+            
+            $res->getBody()->write(\json_encode([
+                "error"=>true,
+                "msg"=>"Group doesn't exists!"
+            ]));
+
+            return $res->withStatus(500);
+
+        }
+
+        $todo = new Todo();
+        $todo->findById($idTodo);
+
+        if ( $todo->id_todo === NULL ) {
+            
+            $res->getBody()->write(\json_encode([
+                "error"=>true,
+                "msg"=>"Todo doesn't exists!"
+            ]));
+
+            return $res->withStatus(500);
+
+        }
+
+        $group->id_todo = $todo->id_todo;
+        $result = $group->addTodoOnGroup();
+
+        if (isset($result['error'])) {
+            $res->getBody()->write(\json_encode($result));
+            return $res->withStatus(500);
+        }
+
+        $res->getBody()->write(\json_encode([
+            "success"=>true,
+            "msg"=>"Todo added on group {$group->name}"
+        ]));
+
+        return $res;
+
+    }
+
 }

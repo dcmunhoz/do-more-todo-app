@@ -29,4 +29,35 @@ class Group extends DataAccess
         ]);
 
     }
+
+    /**
+     * 
+     * Add a todo to a group
+     * 
+     */
+    public function addTodoOnGroup()
+    {
+
+        $validation = parent::raw("SELECT * FROM tb_groupxtodos WHERE id_group = :id_group AND id_todo = :id_todo",[
+            ":id_group"=>$this->id_group,
+            ":id_todo" =>$this->id_todo
+        ]);
+
+        if ( count($validation) >= 1 ) {
+
+            return [ 
+                "error" => true,
+                "msg"   => "Todo already on group"
+            ];
+
+        }
+
+        $result = parent::raw("INSERT INTO tb_groupxtodos(id_group, id_todo) VALUES(:group, :todo) ",[
+            ":group" => (int) $this->id_group,
+            ":todo"  => (int) $this->id_todo
+        ]);
+
+        return $result;
+
+    }
 }
