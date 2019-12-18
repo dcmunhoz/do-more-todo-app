@@ -60,4 +60,31 @@ class Group extends DataAccess
         return $result;
 
     }
+
+    /**
+     * 
+     * Remove a todo grom group
+     * 
+     */
+    public function removeTodoFromGroup()
+    {
+
+        $verify = parent::raw("SELECT count(*) AS QTDE FROM tb_groupxtodos WHERE id_group = :group AND id_todo = :todo",[
+            ":group" => (int) $this->id_group,
+            ":todo"  => (int) $this->id_todo
+        ])[0];
+
+        if (!$verify['QTDE'] >= 1) {
+            return [
+                "error" => true,
+                "msg" => "Todo not on group"
+            ];
+        }
+
+        parent::raw("DELETE FROM tb_groupxtodos WHERE id_group = :group AND id_todo = :todo",[
+            ":group" => (int) $this->id_group,
+            ":todo"  => (int) $this->id_todo
+        ]);
+
+    }
 }

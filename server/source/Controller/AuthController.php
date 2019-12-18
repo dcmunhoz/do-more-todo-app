@@ -9,7 +9,6 @@ use App\App\Authentication;
 
 class AuthController extends Controller
 {
-    private const SESSION_USER = "Authentication";
     
     public function login(Request $req, Response $res, array $args = [])
     {
@@ -33,7 +32,7 @@ class AuthController extends Controller
 
         $result = $auth->login($username, $password);
 
-        if ($result['error']) {
+        if (isset($result['error'])) {
 
             $res->getBody()->write(\json_encode($result));
             return $res->withStatus(403);
