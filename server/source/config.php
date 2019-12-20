@@ -27,4 +27,6 @@ define("DATA_ACCESS", [
     ]
 ]);
 
+define("SESSION_USER", 'Authentication');
+
 date_default_timezone_set("America/Sao_Paulo");

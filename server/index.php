@@ -56,6 +56,8 @@ $app->group("", function($group){
     $group->post('/group/add', TodoController::class . ":createGroup");
 
     $group->post('/group/{idGroup}/todo/{idTodo}', TodoController::class . ":addTodoOnGroup");
+    
+    $group->delete('/group/{idGroup}/todo/{idTodo}', TodoController::class . ":removeTodoFromGroup");
 
 })->add(function (Request $req, RequestHandler $handler) {
 
