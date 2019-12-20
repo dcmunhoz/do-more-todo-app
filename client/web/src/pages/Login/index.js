@@ -8,50 +8,59 @@ import Input from './../../Components/Input';
 import './styles.css';
 
 export default function Login({history}){   
+
     const dispatch = useDispatch();
-    const [validUsername, setValidUsername] = useState(null);
-    const [validPassword, setValidPassword] = useState(null);
+
+    const [validUsername, setValidUsername] = useState(true);
+    const [validPassword, setValidPassword] = useState(true);
 
     // States
     const { username, password } = useSelector(state => state.login);
 
     // Effects
-    
-    function validateLogin(){
+
+    //Functions 
+
+    function validateUsername(){
         if (username === null || username === "") {
             setValidUsername(false);
-            console.log(validUsername);
         } else { 
             setValidUsername(true);
         }
+    }
 
+    function validatePassword(){
         if (password === null || password === "") {
             setValidPassword(false);
         } else { 
             setValidPassword(true);
         }
+
     }
 
-    //Functions 
     async function handleAction() {
 
-        validateLogin();
+        validateUsername();
+        validatePassword();
 
-        console.log(validUsername);
-        if (validUsername === true && validPassword === true) {
-            let response = await fetch('http://localhost/login', {
-                method: "post"
-            });
+        if ((username != null && username != "") && (password != null && password != "")) {
+
+            // let response = await fetch('http://localhost/login',{
+            //     method:"POST",
+            //     headers:{
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body:JSON.stringify({username, password})
+            // }); 
+
+            // let data = await response.json();
+            
+            // console.log(data);
+
+            let response = await api.post("/login", {username, password});
             console.log(response);
+
         }
-
-        // let response = await api.post('/login', {
-        //     username,
-        //     password
-        // } );
-
-        
-       
 
     }
 
@@ -63,15 +72,14 @@ export default function Login({history}){
             type: "USERNAME_CHANGE",
             value: user
         });
-        
 
     }
 
-    function handlePasswordChange (el) {
+    async function handlePasswordChange (el) {
 
         let pass = el.target.value
 
-        dispatch({
+        await dispatch({
             type: "PASSWORD_CHANGE",
             value: pass
         });
@@ -92,7 +100,7 @@ export default function Login({history}){
                         name="username"
                         value={username}
                         action={handleUserChange}
-                        error={(validUsername === null) ? true : validUsername}
+                        error={validUsername}
                     />
 
                     <Input 
@@ -103,7 +111,7 @@ export default function Login({history}){
                         name="password"
                         value={password}
                         action={handlePasswordChange}
-                        error={(validPassword === null ) ? true  : validPassword}
+                        error={validPassword}
                     />
 
                     <Input 

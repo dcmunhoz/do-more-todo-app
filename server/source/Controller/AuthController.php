@@ -15,8 +15,6 @@ class AuthController extends Controller
         
         $body = $req->getParsedBody();
 
-        echo \json_encode($req->getParsedBody());
-        die;
         $username = $body['username'];
         $password = $body['password'];
 
@@ -27,7 +25,7 @@ class AuthController extends Controller
                 "msg"=>"Username and password can't be empty"
             ]));
 
-            return $res->withStatus(400);
+            return $res->withHeader("Content-Type", "application/json;charset=utf-8")->withStatus(403);
             
         }
         
@@ -38,7 +36,7 @@ class AuthController extends Controller
         if (isset($result['error'])) {
 
             $res->getBody()->write(\json_encode($result));
-            return $res->withStatus(403);
+            return $res->withHeader("Content-Type", "application/json;charset=utf-8")->withStatus(403);
 
         }
 
