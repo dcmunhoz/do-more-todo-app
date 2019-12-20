@@ -15,6 +15,9 @@ class AuthController extends Controller
     {
         
         $body = $req->getParsedBody();
+
+        echo \json_encode($req->getParsedBody());
+        die;
         $username = $body['username'];
         $password = $body['password'];
 

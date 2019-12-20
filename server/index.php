@@ -20,6 +20,19 @@ $app = AppFactory::create();
 
 $app->addErrorMiddleware(true, true, true);
 
+$app->add(function(Request $req, RequestHandler $handler){
+    $contentType = $req->getHeaderLine('Content-Type');
+
+    if (strstr($contentType, 'application/json')) {
+        $contents = json_decode(file_get_contents('php://input'), true);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $req = $req->withParsedBody($contents);
+        }
+    }    
+
+    return $handler->handle($req);
+});
+
 $app->post('/login', AuthController::class . ":login");
 $app->post('/user/create', UserController::class . ":create");
 

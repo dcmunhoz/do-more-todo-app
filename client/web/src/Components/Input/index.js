@@ -3,9 +3,8 @@ import React from 'react';
 import './style.css';
 
 const Input = (props) => {
-
-    return (
-        
+    
+    return (        
         <div className="form-group">
 
             {/* Text / Password */}
@@ -13,7 +12,7 @@ const Input = (props) => {
                 <>
                     {(props.title) ? <label 
                     htmlFor={`${props.name}`}
-                    className={`${props.titleClass}`}
+                    className={`${(!props.error) ? 'input-error' : null } ${props.titleClass}`}
 
                     > {props.title} </label> : null } 
 
@@ -22,6 +21,7 @@ const Input = (props) => {
                         placeholder={props.place || null} 
                         id={props.name || null} 
                         name={props.name || null}
+                        className={(!props.error) ? 'input-error' : null }
                         value={props.value}
                         onChange={props.action}
                     />

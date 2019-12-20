@@ -11,6 +11,9 @@
     width: fit-content;
     box-sizing: border-box;
     padding: 5px;
+    display: block;
+    position: relative;
+    left: -10px;
 }
 
 .form-group label.light{
@@ -29,6 +32,23 @@
     transition: 150ms;
 }
 
+.form-group label::before{
+    content: "*";
+    opacity: 0;
+}
+
+.form-group label.input-error{
+    transition: 150ms;
+    color: #f04e4e;
+    left: 0;
+}
+
+.form-group label.input-error::before{
+    content: "*";
+    opacity: 1;
+}
+
+
 .form-group button.btn{
     border: 0;
     padding: 10px 0;
@@ -39,7 +59,7 @@
 }
 
 .form-group button.btn.btn-green{
-    background-color: rgb(240, 78, 78);
+    background-color: #f04e4e;
     color: #fff;
 }
 

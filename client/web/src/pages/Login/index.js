@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import api from './../../utils/api.js';
 
 import Form from './../../Components/Form';
 import Input from './../../Components/Input';
@@ -8,16 +9,49 @@ import './styles.css';
 
 export default function Login({history}){   
     const dispatch = useDispatch();
+    const [validUsername, setValidUsername] = useState(null);
+    const [validPassword, setValidPassword] = useState(null);
 
     // States
     const { username, password } = useSelector(state => state.login);
 
     // Effects
+    
+    function validateLogin(){
+        if (username === null || username === "") {
+            setValidUsername(false);
+            console.log(validUsername);
+        } else { 
+            setValidUsername(true);
+        }
+
+        if (password === null || password === "") {
+            setValidPassword(false);
+        } else { 
+            setValidPassword(true);
+        }
+    }
 
     //Functions 
-    function handleAction() {
+    async function handleAction() {
 
-        history.push('/main');
+        validateLogin();
+
+        console.log(validUsername);
+        if (validUsername === true && validPassword === true) {
+            let response = await fetch('http://localhost/login', {
+                method: "post"
+            });
+            console.log(response);
+        }
+
+        // let response = await api.post('/login', {
+        //     username,
+        //     password
+        // } );
+
+        
+       
 
     }
 
@@ -58,6 +92,7 @@ export default function Login({history}){
                         name="username"
                         value={username}
                         action={handleUserChange}
+                        error={(validUsername === null) ? true : validUsername}
                     />
 
                     <Input 
@@ -68,6 +103,7 @@ export default function Login({history}){
                         name="password"
                         value={password}
                         action={handlePasswordChange}
+                        error={(validPassword === null ) ? true  : validPassword}
                     />
 
                     <Input 
