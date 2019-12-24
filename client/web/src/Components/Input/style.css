@@ -6,7 +6,6 @@
     
 }
 
-
 .form-group label{
     width: fit-content;
     box-sizing: border-box;
@@ -51,22 +50,36 @@
 
 .form-group button.btn{
     border: 0;
-    padding: 10px 0;
+    height: 50px;
     border-radius: 5px;
     outline: none;
     transition: 150ms;
     font-size: 16px;
 }
 
-.form-group button.btn.btn-green{
+
+.form-group button.btn.btn-login{
     background-color: #f04e4e;
     color: #fff;
 }
 
-.form-group button.btn.btn-green:hover{
+.form-group button.btn.btn-login:hover{
     background-color: rgb(247, 58, 58);
     color: #fff;
 }
+
+.form-group button.btn[disabled],
+.form-group button.btn[disabled]:hover{
+    background-color: #f75e5e;
+}
+
+.form-group button.btn[disabled] img{
+    /* width: 20px; */
+    height: 50px;
+    /* background-color: green; */
+    opacity: .5;
+}
+
 
 .form-group input[type="text"]:hover,
 .form-group input[type="password"]:hover{

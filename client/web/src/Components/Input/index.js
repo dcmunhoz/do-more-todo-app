@@ -2,6 +2,8 @@ import React from 'react';
 
 import './style.css';
 
+import loading from './../../Assets/loading.gif';
+
 const Input = (props) => {
     
     return (        
@@ -34,9 +36,10 @@ const Input = (props) => {
                     type={props.type} 
                     id={props.name || null} 
                     name={props.name || null}
-                    className={"btn " + props.class || null}
+                    className={`btn ${props.class} `}
                     onClick={props.action}
-                > {props.value || null} </button>
+                    disabled={(props.disabled)}
+                > { (props.disabled) ? (<img src={loading} className="loading-button-image"></img>) : props.value } </button>
             ) : null}
             
 
