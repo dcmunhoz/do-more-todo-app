@@ -57,8 +57,24 @@ export default function Login({history}){
             
             // console.log(data);
 
-            let response = await api.post("/login", {username, password});
-            console.log(response);
+            try {
+                let response = await api.post("/login", {username, password}, {
+                    headers: {
+                        'Content-Type': "application/json;charset=utf-8"
+                    }
+                });
+                
+                let { token } = response.data;
+
+                console.log(token);
+
+            } catch(error) {
+
+                console.log(error.response);
+
+            }
+
+            
 
         }
 

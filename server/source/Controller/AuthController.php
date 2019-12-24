@@ -12,7 +12,7 @@ class AuthController extends Controller
     
     public function login(Request $req, Response $res, array $args = [])
     {
-        
+
         $body = $req->getParsedBody();
 
         $username = $body['username'];

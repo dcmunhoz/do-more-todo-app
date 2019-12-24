@@ -30,7 +30,17 @@ $app->add(function(Request $req, RequestHandler $handler){
         }
     }    
 
-    return $handler->handle($req);
+    $response = $handler->handle($req);
+
+    return $response
+        ->withHeader('Access-Control-Allow-Origin', SITE_URL)
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
+        ->withHeader('Access-Control-Allow-Credentials', 'true');
+});
+
+$app->options('/{routes:.+}', function ($request, $response, $args) {
+    return $response;
 });
 
 $app->post('/login', AuthController::class . ":login");
@@ -81,6 +91,10 @@ $app->group("", function($group){
 
     return $response;
 
+});
+
+$app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH' ], '/{routes:.+}', function ($request, $response) {
+    throw new HttpNotFoundException($request);
 });
 
 $app->run();

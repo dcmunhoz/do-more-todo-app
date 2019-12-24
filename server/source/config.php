@@ -11,8 +11,6 @@
 // error_reporting(E_ALL);
 // ini_set('display_errors', 1);
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
 
 define("DATA_ACCESS", [
     "driver"   => "mysql",
@@ -28,5 +26,7 @@ define("DATA_ACCESS", [
 ]);
 
 define("SESSION_USER", 'Authentication');
+
+define("SITE_URL", "http://www.domore.com:3000");
 
 date_default_timezone_set("America/Sao_Paulo");
