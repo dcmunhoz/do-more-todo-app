@@ -39,7 +39,7 @@ const Input = (props) => {
                     className={`btn ${props.class} `}
                     onClick={props.action}
                     disabled={(props.disabled)}
-                > { (props.disabled) ? (<img src={loading} className="loading-button-image"></img>) : props.value } </button>
+                > { (props.disabled) ? (<img src={loading} alt="Loading" className="loading-button-image"></img>) : props.value } </button>
             ) : null}
             
 

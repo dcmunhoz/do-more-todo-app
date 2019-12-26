@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
+import SafeRoute from './Components/SafeRoute';
 
 import Login from './Pages/Login';
 import Main from './Pages/Main';
@@ -12,8 +12,9 @@ export default function App() {
         <div id="container">
             <BrowserRouter>
                 <Switch>
-                    <Route path="/" exact={true} component={Login} />
-                    <Route path="/main" component={Main} />
+                    <Route exact path="/" component={Login} />
+                    <Route path="/main2" component={Main} />
+                    <SafeRoute exact path="/main" component={Main} />
                 </Switch>
             </BrowserRouter>
         </div>

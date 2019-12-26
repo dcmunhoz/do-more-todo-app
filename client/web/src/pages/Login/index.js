@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import api from './../../utils/api.js';
+
+import Swal from 'sweetalert2';
 
 import Form from './../../Components/Form';
 import Input from './../../Components/Input';
@@ -17,11 +19,6 @@ export default function Login({history}){
 
     // States
     const { username, password } = useSelector(state => state.login);
-
-    // Effects
-
-
-    //Functions 
 
     function validateUsername(){
         if (username === null || username === "") {
@@ -47,18 +44,6 @@ export default function Login({history}){
 
         if ((username != null && username != "") && (password != null && password != "")) {
 
-            // let response = await fetch('http://localhost/login',{
-            //     method:"POST",
-            //     headers:{
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body:JSON.stringify({username, password})
-            // }); 
-
-            // let data = await response.json();
-            
-            // console.log(data);
-
             setDisabled(true);
             
             try {
@@ -72,23 +57,41 @@ export default function Login({history}){
                 let { token } = response.data;
 
                 sessionStorage.setItem("token", token);
-
+                await dispatch({
+                    type: "AUTH_USER",
+                    value: { token, isAuthenticated: true }
+                });
+                
+                setDisabled(false);
                 history.push('/main');
 
             } catch(error) {
 
-                const { msg } = error.response.data;
 
-                alert(msg);
+                if (error.response) {
 
-            } finally {
+                    const { msg } = error.response.data;
+    
+                    Swal.fire({
+                        title: 'Oooops! =[',
+                        text: msg,
+                        icon: 'error'
+                    })
+
+                } else { 
+
+                    Swal.fire({
+                        title: 'Oooops! =[',
+                        text: 'Não foi possivel se conectar !',
+                        icon: 'error'
+                    })
+                    
+                }
 
                 setDisabled(false);
-
+                
 
             }
-
-            
 
         }
 
@@ -134,7 +137,7 @@ export default function Login({history}){
                     />
 
                     <Input 
-                        type="text" 
+                        type="password" 
                         title="Senha"
                         titleClass="light"
                         place="Digite sua senha"
