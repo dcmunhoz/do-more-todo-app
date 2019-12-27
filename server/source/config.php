@@ -27,6 +27,6 @@ define("DATA_ACCESS", [
 
 define("SESSION_USER", 'Authentication');
 
-define("SITE_URL", "http://www.domore.com:3000");
+define("SITE_URL", "http://localhost:3000");
 
 date_default_timezone_set("America/Sao_Paulo");

@@ -1,0 +1,41 @@
+.app-nav{
+    background-color: #026aa7;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.301);
+
+}
+
+.nav-content, .wrapper{
+    width: 70%;
+}
+
+.nav-content{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-content .nav-logo{
+    font-family: 'Dancing Script';
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.main-content{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 10px;
+}
+
+.wrapper{
+    padding: 10px;
+    box-sizing: border-box;
+}
