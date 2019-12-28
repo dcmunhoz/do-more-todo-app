@@ -61,7 +61,8 @@
 
 
 .wrapper .ct-contents{
-
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
 }
 
@@ -73,4 +74,14 @@
     
 }
 
+.todo-list-body > header{
+    border-bottom: 1px solid rgb(190, 190, 190);
+    font-size: 18px;
+    color: rgb(49, 49, 49);
+    margin-bottom: 10px;
+}
+
+.todo-list-body .list {
+    
+}
 
