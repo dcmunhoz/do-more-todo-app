@@ -50,7 +50,6 @@
 
 .form-group button.btn{
     border: 0;
-    height: 50px;
     border-radius: 5px;
     outline: none;
     transition: 150ms;
@@ -61,6 +60,7 @@
 .form-group button.btn.btn-login{
     background-color: #f04e4e;
     color: #fff;
+    height: 50px;
 }
 
 .form-group button.btn.btn-login:hover{
@@ -91,4 +91,14 @@
     background-color: rgb(255, 255, 255);
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.171);
 
+}
+
+.form-group button.btn.btn-add-todo{
+    /* background-color: #13a56d; */
+    background-color: #018b56;
+    color: #fff;
+    width: 100px;
+    padding: 5px;
+    margin-bottom: -10px;
+    
 }

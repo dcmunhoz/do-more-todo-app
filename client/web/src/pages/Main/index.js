@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import NewTodo from './Components/NewTodo'
+ 
 import './style.css';
 
 export default function Main (){
@@ -15,7 +17,21 @@ export default function Main (){
 
             <div className="main-content">
                 <div className="wrapper">
-                    blablabla
+                    
+                    <section className="rg-contents">
+
+                        Secundario
+
+                    </section>
+                    
+                    <section className="ct-contents">
+                        
+                        <header className="header-new-todo">
+                            <NewTodo />
+                        </header>
+
+                    </section>
+
                 </div>
             </div>
         </>
