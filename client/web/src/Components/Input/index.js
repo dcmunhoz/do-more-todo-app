@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './style.css';
 
 import loading from './../../Assets/loading.gif';
 
 const Input = (props) => {
+    
+    const [disabled, setDisabled] = useState(false);
+
+    async function handleClick(){
+
+        setDisabled(true);
+
+        await props.action();
+
+        setDisabled(false);
+    }
     
     return (        
         <div className="form-group">
@@ -37,9 +48,9 @@ const Input = (props) => {
                     id={props.name || null} 
                     name={props.name || null}
                     className={`btn ${props.class} `}
-                    onClick={props.action}
-                    disabled={(props.disabled)}
-                > { (props.disabled) ? (<img src={loading} alt="Loading" className="loading-button-image"></img>) : props.value } </button>
+                    onClick={handleClick}
+                    disabled={disabled}
+                > { (disabled) ? (<img src={loading} alt="Loading" className="loading-button-image"></img>) : props.value } </button>
             ) : null}
             
 

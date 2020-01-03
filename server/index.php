@@ -34,7 +34,7 @@ $app->add(function(Request $req, RequestHandler $handler){
 
     return $response
         ->withHeader('Access-Control-Allow-Origin', SITE_URL)
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization, Authentication')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
         ->withHeader('Access-Control-Allow-Credentials', 'true');
 });
@@ -83,7 +83,7 @@ $app->group("", function($group){
 
         $response = new Res();
         $response->getBody()->write(json_encode($return));
-        return $response->withStatus(403);
+        return $response->withHeader("Content-Type", "application/json;charset=utf-8")->withStatus(403);
 
     }
 

@@ -15,7 +15,6 @@ export default function Login({history}){
 
     const [validUsername, setValidUsername] = useState(true);
     const [validPassword, setValidPassword] = useState(true);
-    const [disable, setDisabled]            = useState(false);
 
     // States
     const { username, password } = useSelector(state => state.login);
@@ -44,8 +43,6 @@ export default function Login({history}){
 
         if ((username != null && username != "") && (password != null && password != "")) {
 
-            setDisabled(true);
-            
             try {
 
                 let response = await api.post("/login", {username, password}, {
@@ -62,7 +59,6 @@ export default function Login({history}){
                     value: { token, isAuthenticated: true }
                 });
                 
-                setDisabled(false);
                 history.push('/main');
 
             } catch(error) {
@@ -87,8 +83,6 @@ export default function Login({history}){
                     })
                     
                 }
-
-                setDisabled(false);
                 
 
             }
@@ -153,7 +147,6 @@ export default function Login({history}){
                         value="Entrar"
                         class="btn-login"
                         action={handleAction}
-                        disabled={disable}
                     />
                 </Form>
                 

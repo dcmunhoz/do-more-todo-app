@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 
-import Input from './../../../../Components/Input'
+import Input from './../../../../Components/Input';
+
+import api from './../../../../utils/api';
 
 import './style.css';
 
@@ -33,6 +36,54 @@ export default function NewTodo(){
 
     }
 
+    async function addTodo() {
+
+        if (!todoName) {
+    
+            Swal.fire({
+                title: "Ops",
+                icon: 'error',
+                text: 'É necessário informar um nome para o TODO'
+            });
+
+        }else { 
+
+
+            try {
+
+                let response = await api.post("/todo/add", {
+                    name: todoName,
+                    desc: ""
+                }, {
+                    headers: {
+                        'Content-Type': "application/json;charset=utf-8"
+                    }
+                });
+    
+                if (response.data.success) {
+    
+                    Swal.fire({
+                        title: "Parabens ! :D",
+                        text: `TODO ${todoName} inserido com sucesso`,
+                        icon: 'success'
+                    });
+    
+                    setTodoName('');
+                    refInput.current.blur();
+    
+                }
+    
+            } catch(error) { 
+    
+                console.log(error.response);
+    
+            }
+
+        }
+
+
+    }
+
     return(
 
         <div 
@@ -61,7 +112,7 @@ export default function NewTodo(){
                     type="button"
                     class="btn-add-todo"
                     value="Adicionar"
-                    action={()=>alert("teste")}
+                    action={addTodo}
                 />
             </div>
             

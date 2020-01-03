@@ -68,12 +68,12 @@
     color: #fff;
 }
 
-.form-group button.btn[disabled],
-.form-group button.btn[disabled]:hover{
+.form-group button.btn.btn-login[disabled],
+.form-group button.btn.btn-login[disabled]:hover{
     background-color: #f75e5e;
 }
 
-.form-group button.btn[disabled] img{
+.form-group button.btn.btn-login[disabled] img{
     /* width: 20px; */
     height: 50px;
     /* background-color: green; */
@@ -101,4 +101,11 @@
     padding: 5px;
     margin-bottom: -10px;
     
+}
+
+.form-group button.btn.btn-add-todo[disabled] img{
+    /* width: 20px; */
+    height: 18px;
+    /* background-color: green; */
+    opacity: .5;
 }
