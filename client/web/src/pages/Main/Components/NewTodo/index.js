@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 import Input from './../../../../Components/Input';
@@ -8,6 +9,8 @@ import api from './../../../../utils/api';
 import './style.css';
 
 export default function NewTodo(){
+
+    const dispatch = useDispatch();
 
     const [inputing, setInputing] = useState(false);
     const [todoName, setTodoName] = useState('');
@@ -67,7 +70,9 @@ export default function NewTodo(){
                         text: `TODO ${todoName} inserido com sucesso`,
                         icon: 'success'
                     });
-    
+
+                    
+
                     setTodoName('');
                     refInput.current.blur();
     

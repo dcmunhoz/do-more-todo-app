@@ -45,7 +45,7 @@ class TodoController extends Controller{
 
         $res->getBody()->write(\json_encode($result));
 
-        return $res;
+        return $res->withHeader('Content-Type', 'application/json');
     }
 
     public function deleteTodo(Request $req, Response $res, array $args = [])

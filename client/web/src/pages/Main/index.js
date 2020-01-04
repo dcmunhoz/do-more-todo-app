@@ -1,13 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import NewTodo from './Components/NewTodo';
 import Todo from './Components/Todo';
+
+import api from './../../utils/api';
  
 import './style.css';
 
 export default function Main (){
+    const todos = useSelector(store => store.todo);
+    const dispatch = useDispatch();
 
+    const [todoList, setTodoList] = useState([]);
+
+    useEffect( () => {
+        loadTodos().then(response => {
+            
+            dispatch({
+                type: "TODO_LIST",
+                payload: response
+            });
+
+        });
+
+    }, []);
+
+    useEffect(() => {
+
+        setTodoList(todos.todoList);
+
+    }, [todos]);
+
+    function loadTodos(){
+        return new Promise( async (resolve, reject) => {
+
+            api.get('/todo', {
+                headers: {
+                    'Authentication': sessionStorage.getItem('token')
+                }
+            }).then(({data}) => {
+
+                resolve(data);
+
+            }).catch(error=>{
+
+                reject(error);
+
+            });
+
+        });
+    }
+    
 
     return (
         <>
@@ -39,12 +84,9 @@ export default function Main (){
                             </header>
                             
                             <div className="list">
-
-                                <Todo />
-                                <Todo />
-                                <Todo />
-                                <Todo />
                                 
+                                { todoList.map(todo => <Todo key={todo.id_todo} todo={todo} /> ) }
+
                             </div>
 
 

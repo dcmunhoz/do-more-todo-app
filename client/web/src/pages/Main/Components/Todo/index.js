@@ -3,8 +3,7 @@ import { FaCheckCircle, FaTrashAlt } from 'react-icons/fa';
 
 import './style.css';
 
-export default function Todo(){
-
+export default function Todo({todo}){
     
     return(
         <div className="todo-body">
@@ -16,7 +15,7 @@ export default function Todo(){
             <div className="todo-name">
                 <input 
                     type="text" 
-                    value="Todo Name"
+                    value={todo.name}
                 />
             </div>
 
