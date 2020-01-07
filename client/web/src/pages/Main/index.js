@@ -16,6 +16,7 @@ export default function Main (){
     const [todoList, setTodoList] = useState([]);
 
     useEffect( () => {
+
         loadTodos().then(response => {
             
             dispatch({
@@ -25,13 +26,18 @@ export default function Main (){
 
         });
 
-    }, []);
+        dispatch({
+            type: 'UPDATE_TODO_LIST',
+            payload: false
+        });
+
+    }, [todos.shallUpdate]);
 
     useEffect(() => {
 
         setTodoList(todos.todoList);
 
-    }, [todos]);
+    }, [todos.todoList]);
 
     function loadTodos(){
         return new Promise( async (resolve, reject) => {

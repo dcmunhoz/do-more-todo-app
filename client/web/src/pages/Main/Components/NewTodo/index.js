@@ -64,23 +64,28 @@ export default function NewTodo(){
                 });
     
                 if (response.data.success) {
-    
+                    
+                    setTodoName('');
+
+                    dispatch({
+                        type: "UPDATE_TODO_LIST",
+                        payload: true
+                    });
+
                     Swal.fire({
                         title: "Parabens ! :D",
                         text: `TODO ${todoName} inserido com sucesso`,
                         icon: 'success'
                     });
-
                     
 
-                    setTodoName('');
-                    refInput.current.blur();
+                    
     
                 }
     
             } catch(error) { 
     
-                console.log(error.response);
+                console.log(error);
     
             }
 

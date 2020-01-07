@@ -53,5 +53,6 @@ CREATE TABLE tb_groupxtodos(
 	id_todo INT NOT NULL UNIQUE,
 	CONSTRAINT pk_groupxtodos PRIMARY KEY (id_groupxtodos)
 )DEFAULT CHARACTER SET "UTF8";
-alter table tb_groupxtodos add constraint fk_group_groupxtodos foreign key (id_group) references tb_groups(id_group);
-ALTER TABLE tb_groupxtodos ADD CONSTRAINT fk_todo_groupxtodos FOREIGN KEY (id_todo) REFERENCES tb_todos(id_todo);
+alter table tb_groupxtodos add constraint fk_group_groupxtodos foreign key (id_group) references tb_groups(id_group) ON DELETE CASCADE;
+ALTER TABLE tb_groupxtodos ADD CONSTRAINT fk_todo_groupxtodos FOREIGN KEY (id_todo) REFERENCES tb_todos(id_todo) ON DELETE CASCADE;
+

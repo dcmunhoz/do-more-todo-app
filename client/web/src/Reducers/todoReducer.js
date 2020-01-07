@@ -1,6 +1,7 @@
 const initialState = {
 
-    todoList: []
+    todoList: [],
+    shallUpdate: false
 
 }
 
@@ -11,6 +12,10 @@ export const TodoReducer = (state = initialState, action) => {
             state = { ...state, todoList: action.payload };
             return state;
         break;        
+        case 'UPDATE_TODO_LIST':
+            state = { ...state, shallUpdate: action.payload };
+            return state;
+        break;
         default:
             return state;
     }
