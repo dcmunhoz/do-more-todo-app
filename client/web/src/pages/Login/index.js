@@ -38,6 +38,8 @@ export default function Login({history}){
 
     async function handleAction() {
 
+        sessionStorage.removeItem('token');
+
         validateUsername();
         validatePassword();
 

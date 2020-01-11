@@ -59,7 +59,8 @@ export default function NewTodo(){
                     desc: ""
                 }, {
                     headers: {
-                        'Content-Type': "application/json;charset=utf-8"
+                        'Content-Type': "application/json;charset=utf-8",
+                        'Authentication': sessionStorage.getItem('token')
                     }
                 });
     

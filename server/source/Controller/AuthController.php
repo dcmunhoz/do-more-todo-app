@@ -48,12 +48,9 @@ class AuthController extends Controller
 
         $token = \base64_encode( json_encode($authentication) );
         \session_start();
-        
-        if (!isset($_SESSION[SESSION_USER])) {
 
-            $_SESSION[SESSION_USER] = $token;
+        $_SESSION[SESSION_USER] = $token;
 
-        }
 
         $res->getBody()->write( \json_encode( [
             "auth" => true,
