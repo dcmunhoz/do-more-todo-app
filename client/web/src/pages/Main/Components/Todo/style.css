@@ -12,6 +12,14 @@
     margin: 0px 2px;
 }
 
+.todo-body.fade-out-todo{
+    opacity: 1;
+    animation-name: fadeTodoOut;
+    animation-duration: 500ms;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
 .todo-body .check-button{
     cursor: pointer;
     display: flex;
@@ -31,4 +39,15 @@
     background-color: transparent;
     font-size: 16px;
 
+}
+
+@keyframes fadeTodoOut {
+    from{
+
+        opacity: 1;
+
+    }
+    to{
+        opacity: 0;
+    }
 }

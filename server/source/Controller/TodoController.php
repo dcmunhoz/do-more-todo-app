@@ -36,12 +36,12 @@ class TodoController extends Controller{
 
     public function listTodo(Request $req, Response $res, array $args = [])
     {
-
+        
         $todo = new Todo();
         $user = new User();
         $user->getAuthUser();
 
-        $result = $todo->find()->filter("id_user = :id_user", [":id_user" => $user->id_user])->fetch(true);
+        $result = $todo->find()->filter("id_user = :id_user and done = false", [":id_user" => $user->id_user])->fetch(true);
 
         $res->getBody()->write(\json_encode($result));
 
