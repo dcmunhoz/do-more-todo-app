@@ -11,6 +11,7 @@ import './style.css';
 export default function Todo({todo, fade}){
     const storeTodo = useSelector(store => store.todo);
     const dispatch = useDispatch();
+    const [fadeOut, setFadeOut] = useState('');
 
 
     async function handleCheckTodoAsDone() {
@@ -47,8 +48,38 @@ export default function Todo({todo, fade}){
     }
 
 
+    useEffect(()=>{
+
+        const {done} = storeTodo.markedDone;
+
+        if (done) {
+            
+            setFadeOut('fade-out-todo');
+
+            setTimeout(() => {
+                dispatch({
+                    type: "UPDATE_TODO_LIST",
+                    payload: true
+                });
+
+                setTimeout(() => {
+                    dispatch({
+                        type: 'MARKED_DONE',
+                        payload: {
+                            done: false,
+                            id: null
+                        }
+                    });
+                }, 100);
+            }, 500);
+
+        }
+
+    }, [storeTodo.markedDone]);
+
+
     return(
-        <div className={"todo-body" + ` ${ (todo.id_todo == storeTodo.markedDone.id) ? fade : ''  }`} >
+        <div className={"todo-body" + ` ${ (todo.id_todo == storeTodo.markedDone.id) ? fadeOut : ''  }`} >
 
             <div 
                 className="check-button"

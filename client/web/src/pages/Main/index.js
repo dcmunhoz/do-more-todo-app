@@ -12,7 +12,6 @@ import './style.css';
 export default function Main (){
     const todos = useSelector(store => store.todo);
     const dispatch = useDispatch();
-    const [fadeOut, setFadeOut] = useState('');
 
     const [todoList, setTodoList] = useState([]);
 
@@ -39,34 +38,6 @@ export default function Main (){
         setTodoList(todos.todoList);
 
     }, [todos.todoList]);
-
-
-    useEffect(()=>{
-
-        const {done} = todos.markedDone;
-
-        if (done) {
-            
-            setFadeOut('fade-out-todo');
-
-            dispatch({
-                type: 'MARKED_DONE',
-                payload: {
-                    done: false,
-                    id: null
-                }
-            });
-
-            setInterval(() => {
-                dispatch({
-                    type: "UPDATE_TODO_LIST",
-                    payload: true
-                });
-            }, 500);
-
-        }
-
-    }, [todos.markedDone]);
 
     function loadTodos(){
         return new Promise( async (resolve, reject) => {
@@ -120,7 +91,7 @@ export default function Main (){
                             
                             <div className="list">
                                 
-                                { todoList.map(todo => <Todo key={todo.id_todo} todo={todo} fade={fadeOut} /> ) }
+                                { todoList.map(todo => <Todo key={todo.id_todo} todo={todo} /> ) }
 
                             </div>
 
