@@ -96,7 +96,9 @@ export default function Todo({todo, fade}){
             </div>
 
             <div className="todo-options">
-                <div>
+                <div
+                    className="remove-button"
+                >
                     <FaTrashAlt />
                 </div>
             </div>

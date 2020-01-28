@@ -37,6 +37,7 @@ export default function Main (){
 
         setTodoList(todos.todoList);
 
+
     }, [todos.todoList]);
 
     function loadTodos(){
@@ -91,7 +92,13 @@ export default function Main (){
                             
                             <div className="list">
                                 
-                                { todoList.map(todo => <Todo key={todo.id_todo} todo={todo} /> ) }
+                                { (todoList.length === 0 ) ? (
+                                    <div className="no-todo">
+                                        Nenhum TODO a ser exibido.
+                                    </div>
+                                ) : (
+                                    todoList.map(todo => <Todo key={todo.id_todo} todo={todo} /> )
+                                ) }
 
                             </div>
 
