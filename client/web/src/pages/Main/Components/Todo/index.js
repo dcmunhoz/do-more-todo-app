@@ -12,7 +12,73 @@ export default function Todo({todo, fade}){
     const storeTodo = useSelector(store => store.todo);
     const dispatch = useDispatch();
     const [fadeOut, setFadeOut] = useState('');
+    const [todoDeleted, setTodoDeleted] = useState(false);
 
+    useEffect(()=>{
+
+        const {done} = storeTodo.markedDone;
+
+        if (done) {
+            
+            setFadeOut('fade-out-todo');
+
+            setTimeout(() => {
+                dispatch({
+                    type: "UPDATE_TODO_LIST",
+                    payload: true
+                });
+
+                setTimeout(() => {
+                    dispatch({
+                        type: 'MARKED_DONE',
+                        payload: {
+                            done: false,
+                            id: null
+                        }
+                    });
+                }, 100);
+            }, 500);
+
+        }
+
+    }, [storeTodo.markedDone]);
+
+    useEffect(() => {
+
+        async function deleteTodo(){
+            if (todoDeleted) {
+
+                const response = await api.delete(`/todo/${todo.id_todo}`, {
+                    headers:{
+                        'Authentication': sessionStorage.getItem('token')
+                    }
+                });
+    
+                const { success } = response.data;
+
+                if ( success ) {
+                
+                    setTimeout( () => {
+
+                        setTodoDeleted(false);
+    
+                        dispatch({
+                            type: 'UPDATE_TODO_LIST',
+                            payload: true
+                        });
+        
+        
+                    }, 400);
+
+                }
+
+    
+            }
+        }
+
+        deleteTodo();
+
+    }, [todoDeleted] );
 
     async function handleCheckTodoAsDone() {
 
@@ -47,39 +113,14 @@ export default function Todo({todo, fade}){
 
     }
 
+    async function handleDeleteTodo() {
+        
+        setTodoDeleted(true);
 
-    useEffect(()=>{
-
-        const {done} = storeTodo.markedDone;
-
-        if (done) {
-            
-            setFadeOut('fade-out-todo');
-
-            setTimeout(() => {
-                dispatch({
-                    type: "UPDATE_TODO_LIST",
-                    payload: true
-                });
-
-                setTimeout(() => {
-                    dispatch({
-                        type: 'MARKED_DONE',
-                        payload: {
-                            done: false,
-                            id: null
-                        }
-                    });
-                }, 100);
-            }, 500);
-
-        }
-
-    }, [storeTodo.markedDone]);
-
+    }
 
     return(
-        <div className={"todo-body" + ` ${ (todo.id_todo == storeTodo.markedDone.id) ? fadeOut : ''  }`} >
+        <div className={"todo-body" + ` ${ (todo.id_todo == storeTodo.markedDone.id) ? fadeOut : ''  } ${ (todoDeleted) ? 'todo-deleted' : '' } `} >
 
             <div 
                 className="check-button"
@@ -99,7 +140,7 @@ export default function Todo({todo, fade}){
                 <div
                     className="remove-button"
                 >
-                    <FaTrashAlt />
+                    <FaTrashAlt onClick={handleDeleteTodo} />
                 </div>
             </div>
 

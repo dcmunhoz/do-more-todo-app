@@ -72,11 +72,11 @@ export default function Main (){
             <div className="main-content">
                 <div className="wrapper">
                     
-                    <section className="rg-contents">
+                    {/* <section className="rg-contents">
 
                         Secundario
 
-                    </section>
+                    </section> */}
                     
                     <section className="ct-contents">
                         

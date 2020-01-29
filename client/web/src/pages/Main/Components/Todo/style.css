@@ -3,8 +3,10 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 0px;
+    
 
     padding: 10px;
+
 
 }
 
@@ -20,6 +22,30 @@
     animation-fill-mode: forwards;
     animation-play-state: running;
 }
+
+.todo-body.todo-deleted {
+    position: relative;
+}
+
+.todo-body.todo-deleted::before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    top:0;
+    right: 0;
+    border-radius: 10px;
+    box-sizing: border-box;
+    opacity: 0;
+    
+
+    animation-name: fadeDelete;
+    animation-duration: 350ms;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+    animation-play-state: running;
+}
+
 
 .todo-body .check-button{
     cursor: pointer;
@@ -61,5 +87,15 @@
     }
     to{
         opacity: 0;
+    }
+}
+
+@keyframes fadeDelete {
+    from{
+        
+    }to{
+        background-color: #ca1a1a; 
+        width: 100%;
+        opacity: 1;
     }
 }
