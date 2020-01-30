@@ -19,11 +19,8 @@ export default function Main (){
 
         loadTodos().then(response => {
             
-            dispatch({
-                type: "TODO_LIST",
-                payload: response
-            });
-
+            setTodoList(response);
+            
         });
 
         dispatch({
@@ -32,13 +29,6 @@ export default function Main (){
         });
 
     }, [todos.shallUpdate]);
-
-    useEffect(() => {
-
-        setTodoList(todos.todoList);
-
-
-    }, [todos.todoList]);
 
     function loadTodos(){
         return new Promise( async (resolve, reject) => {
@@ -60,7 +50,6 @@ export default function Main (){
         });
     }
     
-
     return (
         <>
             <nav className="app-nav">
